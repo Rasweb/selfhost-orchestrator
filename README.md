@@ -1,15 +1,26 @@
-# selfhost-orchestrator
-Monitor and control self-hosted apps on a Raspberry Pi.  
+# Selfhost Orchestrator
+A lightweight orchestration platform for homelab
+and self-hosted services.
 
-## Info
-Build a browser-accessible app with a Python FastAPI backend and TypeScript React frontend, deployed on Raspberry Pi with Docker/Podman. 
+## Features
+- Service monitoring
+- Health checks
+- Docker integration
+- Historical metrics
+- Scheduled jobs
+- Notifications
+- Multi-host architecture
+- Raspberry Pi optimized
 
-A backend-first orchestration platform for self-hosted services:
-- Manages and monitors 
-- Exposes a cREST API
-- Stores metadata, status history, and task schedules
-- Serves a frontend UI for browser access
+## Built with
+- FastAPI
+- Vue
+- TypeScript
+- SQLite
+- Docker
+---
 
+# Planning INFO
 ## Core features
 **Backend API**
 - service registry for apps
@@ -71,3 +82,103 @@ pip install "fastapi[standard]"
 ``` bash
 deactivate
 ```
+
+## Layers 
++---------------+
+| Frontend      |
++---------------+
+        |
++---------------+
+| FastAPI API   |
++---------------+
+        |
++---------------+
+| Adapter Layer |
++---------------+
+        |
++---------------+
+| Services      |
+| Service1      |
+| Service2      |
+| Service3      |
+| RSS           |
+| Future apps   |
++---------------+
+
+## Features that may be implemented
+Version 1
+
+### Dashboard
+Cards:
++----------------------+
+| Service1             |
+| Online               |
+| Uptime: 4d 12h       |
+| Version: 0.9.4       |
+| [Open] [Restart]     |
++----------------------+
+
++----------------------+
+| Service2             |
+| Online               |
+| Response: 45ms       |
+| [Open] [Restart]     |
++----------------------+
+
+### Service Registry
+- id
+- name
+- url
+- healthcheck_url
+- adapter_type
+- icon
+- description
+
+### Health Monitoring
+Background tasks:
+- Ping services
+- Save results
+
+Store history:
+- service_id
+- status
+- response_time
+- timestamp
+
+### Metrics
+- CPU
+- RAM
+- Disk
+- Temperature
+
+### Docker Container Management
+- Running containers
+- Stopped containers
+- Restart container
+- View logs
+
+### Scheduled Tasks:
+- Restart Service
+- Backup Service
+- Cleanup logs
+
+### Notification System
+- Service down
+- Disk > 90%
+- CPU > 80%
+
+### Backup Manager
+- Backup Service
+- Store backups on different places
+
+### Audit Logs:
+- User logged in
+- Service restarted
+- Backup created
+
+### Home dashboard 
+- Today's feed(RSS)
+- Recent saved articles
+- Service health
+- System status
+- Recent backups
