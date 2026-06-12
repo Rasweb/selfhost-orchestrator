@@ -1,85 +1,106 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { ref } from 'vue'
+
+const isOpen = ref(false);
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
+    <div class="layout">
+      <header>
+        <button class="menu-btn" @click="isOpen = !isOpen" :class="{active: isOpen}">
+          <span v-if="isOpen">X</span>
+          <span v-else>☰</span>
+        </button>
+        <span class="title">
+          Headline
+        </span>
+      </header>
+      <aside class="sidebar" :class="{open: isOpen}">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-      </nav>
+        <RouterLink to="/settings/notifications">Settings</RouterLink>
+      </aside>
+      <main>
+        <RouterView />
+      </main>
     </div>
-  </header>
-
-  <RouterView />
 </template>
 
 <style scoped>
+.layout {
+  display: grid;
+  gap: 1rem;
+}
+
 header {
-  line-height: 1.5;
-  max-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1rem;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.title {
+  padding: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.menu-btn {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 0.6rem 0.8rem;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.sidebar {
+  display: none;
+  width: 100px;
+  flex-direction: column;
+  gap: 4px;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.sidebar.open {
+  display: flex;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
+.sidebar a {
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
 }
 
 @media (min-width: 1024px) {
+  .sidebar {
+    padding: 8px;
+    overflow-y: auto;
+  }
+}
+
+main {
+  padding: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 110px 1fr;
+    grid-template-areas:
+      "header header"
+      "sidebar main";
+  }
+
   header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    grid-area: header;
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  .sidebar{
+    grid-area: sidebar;
   }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+  main {
+    grid-area: main;
   }
 }
 </style>
