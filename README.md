@@ -20,6 +20,20 @@ and self-hosted services.
 - Docker
 ---
 
+## Run dev
+**Frontend**
+```sh
+bun dev
+```
+
+**Backend**
+
+```sh
+fastapi dev
+```
+
+
+
 # Planning INFO
 ## Core features
 **Backend API**
